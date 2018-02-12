@@ -396,6 +396,7 @@ class StatusResourceBuilder(HtmlResource, BuildLineMixin):
         cxt['instant_json']["start_slaves"] = self.getSlavesJsonResource(filters, url, startslaves_dict)
 
         cxt['numbuilds'] = int(req.args.get('numbuilds', [self.numbuilds])[0])
+
         buildForceContext(cxt, req, self.getBuildmaster(req), b.getName())
         template = req.site.buildbot_service.templates.get_template("builder.html")
         defer.returnValue(template.render(**cxt))
@@ -633,6 +634,7 @@ class BuildersResource(HtmlResource):
                                                "stepStarted": filters,
                                                "stepFinished": filters,
                                            }}
+
 
         template = req.site.buildbot_service.templates.get_template("builders.html")
         defer.returnValue(template.render(**cxt))
