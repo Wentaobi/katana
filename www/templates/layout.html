@@ -78,7 +78,7 @@
     {% set colorBlindInputVal = 'off' %}
   {% endif %}
 
-   <body {{ bodyId }} class="interface katana-main {{colorBlindClass}}" data-realTimeServer="{{ realTimeServer }}" style="display:none;">
+   <body {{ bodyId }} class="interface katana-main {{colorBlindClass}}" data-realTimeServer="{{ realTimeServer }}">
    
     {% block header -%}
  
@@ -131,6 +131,9 @@
             <a id="projects" href="{{ path_to_root }}projects">Projects</a>            
             <span id="projectDropdown" class="arrow-down-btn"></span>            
           </li>
+            <li>
+               <a id="mybuilds" href="{{ path_to_root }}mybuilds">My builds</a>
+            </li>
           <li>
             <a id="buildslaves"  href="{{ path_to_root }}buildslaves">
               <span id="verticalProgressBar" class="outer-bar tooltip responsive-tooltip">
