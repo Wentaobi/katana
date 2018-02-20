@@ -13,10 +13,30 @@
 #
 # Copyright Buildbot Team Members
 
+from contextlib import contextmanager
 from sqlalchemy.dialects import mysql
 from datetime import datetime
 from decimal import Decimal
 from sqlalchemy.orm import Query
+
+
+@contextmanager
+def conn_execute(connection, query, *args, **kwargs):
+    """ Automatically close SQLAlchemy result
+
+    @param connection: valid connection to database
+    @type connection: sqlalchemy.engine.base.Connection
+    @param query: valid sql statement object
+    @param args: additional param to connection
+    @param kwargs: additional param to connection
+    @return: instance of sqlalchemy.engine.base.ResultProxy
+    """
+    result = connection.execute(query, *args, **kwargs)
+    try:
+        yield result
+    finally:
+        result.close()
+
 
 class DBConnectorComponent(object):
     # A fixed component of the DBConnector, handling one particular aspect of
